@@ -1,0 +1,45 @@
+CREATE TABLE users (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(100),
+ email VARCHAR(100),
+ password VARCHAR(255),
+ balance DECIMAL(10,2) DEFAULT 0,
+ role ENUM('admin','user') DEFAULT 'user',
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ user_id INT,
+ service VARCHAR(255),
+ link TEXT,
+ quantity INT,
+ price DECIMAL(10,2),
+ status VARCHAR(50),
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE services (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(255),
+ rate DECIMAL(10,2),
+ min INT,
+ max INT,
+ status TINYINT DEFAULT 1
+);
+
+CREATE TABLE providers (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(100),
+ api_url TEXT,
+ api_key TEXT
+);
+
+CREATE TABLE payments (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ user_id INT,
+ amount DECIMAL(10,2),
+ method VARCHAR(50),
+ status VARCHAR(50),
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
