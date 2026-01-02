@@ -1,5 +1,0 @@
-<?php include("../config/settings.php"); ?>
-
-<a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>" target="_blank">
-WhatsApp Support
-</a><br>
