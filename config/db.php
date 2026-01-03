@@ -1,11 +1,12 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "masmmpanel";
+$conn = mysqli_connect(
+  "sql309.infinityfree.com",
+  "if0_40818881",
+  "WuV4DzRiGA",
+  "if0_40818881_masmm"
+);
 
-$conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
-    die("Database connection failed");
+  die("Database connection failed: " . mysqli_connect_error());
 }
 ?>
