@@ -1,11 +1,12 @@
 <?php
-include("../config/session.php");
-include("../config/db.php");
+require_once __DIR__ . "/../config/session.php";
 
 if ($_SESSION['role'] != "admin") {
     header("Location: ../index.php");
     exit;
 }
+?>
+    
 
 // stats
 $users  = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM users"))[0];
