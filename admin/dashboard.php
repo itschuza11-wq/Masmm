@@ -1,18 +1,24 @@
 <?php
 require_once __DIR__ . "/../config/session.php";
 
-if ($_SESSION['role'] != "admin") {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
     header("Location: ../index.php");
     exit;
 }
-?>
-    
 
 // stats
 $users  = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM users"))[0];
 $orders = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM orders"))[0];
 $sales  = mysqli_fetch_row(mysqli_query($conn,"SELECT SUM(price) FROM orders"))[0];
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 
 <h3>Admin Dashboard</h3>
 
@@ -31,3 +37,6 @@ $sales  = mysqli_fetch_row(mysqli_query($conn,"SELECT SUM(price) FROM orders"))[
 <hr>
 
 <a href="../index.php?logout=1">Logout</a>
+
+</body>
+</html>
