@@ -1,42 +1,39 @@
 <?php
-require_once __DIR__ . "/../config/session.php";
-
-if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
-    header("Location: ../index.php");
-    exit;
+require_once "../config/session.php";
+require_once "../config/db.php";
+if($_SESSION['role']!="admin"){
+ header("Location: ../index.php");
+ exit;
 }
-
-// stats
-$users  = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM users"))[0];
-$orders = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM orders"))[0];
-$sales  = mysqli_fetch_row(mysqli_query($conn,"SELECT SUM(price) FROM orders"))[0];
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="../assets/css/panel.css">
 </head>
 <body>
 
-<h3>Admin Dashboard</h3>
+<div class="topbar">ADMIN PANEL</div>
 
-<div>Users: <?php echo $users; ?></div>
-<div>Orders: <?php echo $orders; ?></div>
-<div>Sales: Rs <?php echo $sales ?? 0; ?></div>
+<div class="layout">
 
-<hr>
+<div class="sidebar">
+<a class="active" href="dashboard.php">Dashboard</a>
+<a href="#">Users</a>
+<a href="#">Orders</a>
+<a href="#">Services</a>
+</div>
 
-<a href="users.php">Users</a><br>
-<a href="orders.php">Orders</a><br>
-<a href="services.php">Services</a><br>
-<a href="providers.php">API Providers</a><br>
-<a href="payments.php">Payments</a><br>
+<div class="content">
 
-<hr>
+<div class="stats">
+ <div class="stat"><span>Users</span><h2>0</h2></div>
+ <div class="stat"><span>Orders</span><h2>0</h2></div>
+ <div class="stat"><span>Sales</span><h2>Rs 0</h2></div>
+</div>
 
-<a href="../index.php?logout=1">Logout</a>
-
+</div>
+</div>
 </body>
 </html>
