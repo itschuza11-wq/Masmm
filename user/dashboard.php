@@ -1,36 +1,49 @@
 <?php
-require_once __DIR__ . "/../config/session.php";
-
-// user login check
-if (!isset($_SESSION['role']) || $_SESSION['role'] != "user") {
-    header("Location: ../index.php");
-    exit;
+require_once "../config/session.php";
+if ($_SESSION['role'] != "user") {
+  header("Location: ../index.php");
+  exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard</title>
+<link rel="stylesheet" href="../assets/css/panel.css">
 </head>
 <body>
 
-<h3>User Dashboard</h3>
+<div class="topbar">MASMM PANEL</div>
 
-<p>
-Welcome: <strong><?php echo htmlspecialchars($_SESSION['email']); ?></strong>
-</p>
+<div class="layout">
 
-<hr>
+<div class="sidebar">
+  <a class="active" href="dashboard.php">Dashboard</a>
+  <a href="new-order.php">New Order</a>
+  <a href="orders.php">Orders</a>
+  <a href="../index.php?logout=1">Logout</a>
+</div>
 
-<a href="new-order.php">New Order</a><br>
-<a href="orders.php">My Orders</a><br>
-<a href="affiliate.php">Affiliate</a><br>
+<div class="content">
 
-<hr>
+<div class="stats">
+  <div class="stat-box">
+    <span>Balance</span>
+    <h2>Rs 0</h2>
+  </div>
+  <div class="stat-box">
+    <span>Total Orders</span>
+    <h2>0</h2>
+  </div>
+  <div class="stat-box">
+    <span>Total Spent</span>
+    <h2>Rs 0</h2>
+  </div>
+</div>
 
-<a href="../index.php?logout=1">Logout</a>
+</div>
+</div>
 
 </body>
 </html>
